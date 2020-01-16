@@ -1,0 +1,27 @@
+package ex;
+
+import java.awt.Frame;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+@SuppressWarnings("serial")
+public class paintMain extends Frame {
+
+	public paintMain() {
+		
+		setBounds(250,300,600,500);
+		setVisible(true);
+		
+		//Á¾·á
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				System.exit(0);
+			}
+		});
+	}
+
+	public static void main(String[] args) {
+		new paintMain();
+	}
+}

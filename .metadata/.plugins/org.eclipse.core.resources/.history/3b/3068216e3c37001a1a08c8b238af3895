@@ -1,0 +1,85 @@
+package swingPractice;
+
+import java.awt.Canvas;
+import java.awt.Color;
+import java.awt.Graphics;
+
+@SuppressWarnings("serial")
+public class DrCanvas2 extends Canvas {
+	private MsPaint2 msPaint2;
+	ShapeDTO2 dto;
+	private boolean fill;
+	private int shape;
+
+	public DrCanvas2(MsPaint2 msPaint2) {
+		this.msPaint2 = msPaint2;
+		this.setBackground(new Color(244, 224, 254)); // 연보라 색으로
+		// 이벤트
+	}
+
+	@Override
+	public void paint(Graphics g) {
+		dto = new ShapeDTO2();
+
+		// 좌표
+		int x1 = Integer.parseInt(msPaint2.getX1T().getText().trim());// 양쪽의 공백을 제거해서 가져옴
+		int y1 = Integer.parseInt(msPaint2.getY1T().getText().trim());
+		int x2 = Integer.parseInt(msPaint2.getX2T().getText().trim());
+		int y2 = Integer.parseInt(msPaint2.getY2T().getText().trim());
+		int z1 = Integer.parseInt(msPaint2.getZ1T().getText().trim());
+		int z2 = Integer.parseInt(msPaint2.getZ2T().getText().trim());
+
+		// 색
+		switch (msPaint2.getCombo().getSelectedIndex()) {
+		case 0:
+			g.setColor(new Color(255, 0, 0));
+			break;
+		case 1:
+			g.setColor(new Color(255, 100, 0));
+			break;
+		case 2:
+			g.setColor(new Color(255, 255, 0));
+			break;
+		case 3:
+			g.setColor(new Color(0, 255, 0));
+			break;
+		case 4:
+			g.setColor(new Color(0, 0, 255));
+			break;
+		case 5:
+			g.setColor(new Color(0, 0, 150));
+			break;
+		case 6:
+			g.setColor(new Color(255, 0, 255));
+			break;
+		}
+
+		// 도형
+		if (fill) {
+			if (shape == 0) {
+				g.drawLine(x1, y1, x2, y2);
+			} else if (shape == 1) {
+				g.fillOval(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x2 - x1), Math.abs(y2 - y1));
+			} else if (shape == 2) {
+				g.fillRect(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x2 - x1), Math.abs(y2 - y1));
+			} else if (shape == 3) {
+				g.fillRoundRect(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x2 - x1), Math.abs(y2 - y1), z1, z2);
+			} else if (shape == 7) {
+				g.drawLine(x1, y1, x2, y2);
+			}
+		} else if (!fill) {
+			if (shape == 0) {
+				g.drawLine(x1, y1, x2, y2);
+			} else if (shape == 4) {
+				g.drawOval(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x2 - x1), Math.abs(y2 - y1));
+			} else if (shape == 5) {
+				g.drawRect(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x2 - x1), Math.abs(y2 - y1));
+			} else if (shape == 6) {
+				g.drawRoundRect(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x2 - x1), Math.abs(y2 - y1), z1, z2);
+			} else if (shape == 7) {
+				g.drawLine(x1, y1, x2, y2);
+			}
+		}
+
+	}
+}

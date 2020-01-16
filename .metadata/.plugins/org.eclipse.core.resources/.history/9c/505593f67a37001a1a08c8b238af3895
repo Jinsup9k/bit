@@ -1,0 +1,88 @@
+package DataStream;
+
+import java.awt.Event;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.KeyStroke;
+
+@SuppressWarnings("serial")
+public class MenuPane extends JMenuBar implements ActionListener {
+	private JMenu fileM, editM, viewM;
+	private JMenuItem newM, openM, saveM, exitM, cutM, copyM, pasteM, jinsM;
+	private TryNotepad tryNotepad;
+
+	public MenuPane(TryNotepad tryNotepad) {
+		this.tryNotepad = tryNotepad;
+		fileM = new JMenu("파일");
+		editM = new JMenu("편집");
+		viewM = new JMenu("보기");
+
+		newM = new JMenuItem("새로만들기");
+		openM = new JMenuItem("열기");
+		saveM = new JMenuItem("저장");
+		exitM = new JMenuItem("나가기");
+		cutM = new JMenuItem("잘라내기");
+		cutM.setAccelerator(KeyStroke.getKeyStroke('X',Event.ALT_MASK));
+		copyM = new JMenuItem("복사");
+		copyM.setAccelerator(KeyStroke.getKeyStroke('C',Event.ALT_MASK));
+		pasteM = new JMenuItem("붙여넣기");
+		pasteM.setAccelerator(KeyStroke.getKeyStroke('V',Event.ALT_MASK));
+		jinsM = new JMenuItem("박진수가 만들었다");
+
+		fileM.add(newM);
+		fileM.add(openM);
+		fileM.add(saveM);
+		fileM.add(exitM);
+		editM.add(cutM);
+		editM.add(copyM);
+		editM.add(pasteM);
+		viewM.add(jinsM);
+
+		add(fileM);
+		add(editM);
+		add(viewM);
+
+		// 단축키 만들기가 숙제~ c v x
+
+	}
+
+	public JMenuItem getNewM() {
+		return newM;
+	}
+
+	public JMenuItem getExitM() {
+		return exitM;
+	}
+
+	public JMenuItem getOpenM() {
+		return openM;
+	}
+
+	public JMenuItem getSaveM() {
+		return saveM;
+	}
+
+	public JMenuItem getCutM() {
+		return cutM;
+	}
+
+	public JMenuItem getCopyM() {
+		return copyM;
+	}
+
+	public JMenuItem getPasteM() {
+		return pasteM;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+
+	}
+
+}

@@ -1,0 +1,119 @@
+package swing;
+
+import java.awt.Container;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Vector;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+public class JTabelEx2 extends JFrame implements ActionListener {
+	private ArrayList<PersonDTO> list; // 테이블엔 리스트가 안붙더라..
+	private Vector<String> title;
+	private DefaultTableModel model;
+	private JTable table;
+	private JButton insertButton, deleteButton;
+	private JPanel p1;
+
+	public JTabelEx2() {
+		list = new ArrayList<PersonDTO>();
+		list.add(new PersonDTO("hong", "홍길동", "111", "010-123-1234"));
+		list.add(new PersonDTO("jong", "종길동", "222", "010-456-4567"));
+
+		title = new Vector<String>();
+		title.addElement("ID");
+		title.addElement("NAME");
+		title.addElement("PASSWORD");
+		title.addElement("PHONE");
+
+		model = new DefaultTableModel(title, 0) {// 빈행의 수를 의미한다.
+			@Override
+			public boolean isCellEditable(int r, int c) {// 0번째 줄은 수정이 불가능
+				return (c != 0) ? true : false;
+			}
+		};
+
+		for (PersonDTO dto : list) {
+			Vector<String> v = new Vector<String>();
+			v.add(dto.getId());
+			v.add(dto.getName());
+			v.add(dto.getPassword());
+			v.add(dto.getTel());
+
+			model.addRow(v);
+		}
+		table = new JTable(model);
+		JScrollPane scroll = new JScrollPane(table);
+
+		insertButton = new JButton("추가");
+		deleteButton = new JButton("삭제");
+		p1 = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+		p1.add(insertButton);
+		p1.add(deleteButton);
+		insertButton.addActionListener(this);
+		deleteButton.addActionListener(this);
+
+		Container con = getContentPane();
+		con.add("Center", scroll);
+		con.add("South", p1);
+		setBounds(200, 300, 500, 500);
+		setVisible(true);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+
+	public static void main(String[] args) {
+		new JTabelEx2();
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getActionCommand() == insertButton.getActionCommand()) {
+			insert();
+		} else if (e.getActionCommand() == deleteButton.getActionCommand()) {
+			delete();
+		}
+	}
+
+	private void delete() {
+		String name = JOptionPane.showInputDialog(this, "이름을 입력하시오 :");
+
+		// Iterator<PersonDTO> dto
+
+	}
+
+	private void insert() {
+		String name = JOptionPane.showInputDialog(this, "이름을 입력하시오 :");
+		String id = JOptionPane.showInputDialog(this, "ID 입력 :");
+
+		for (PersonDTO dto : list) {
+			if (id.equals(dto.getId())) {
+				JOptionPane.showMessageDialog(this, "중복된 아이디 입니다.");
+				break;
+			} else {
+				String password = JOptionPane.showInputDialog(this, "PW 입력 :");
+				String tel = JOptionPane.showInputDialog(this, "전화번호 입력 :");
+				list = new ArrayList<PersonDTO>();
+				list.add(new PersonDTO(id, name, password, tel));
+				break;
+			}
+		}
+		for (PersonDTO dto : list) {
+			Vector<String> v = new Vector<String>();
+			v.add(dto.getId());
+			v.add(dto.getName());
+			v.add(dto.getPassword());
+			v.add(dto.getTel());
+
+			model.addRow(v);
+		}
+	}
+}

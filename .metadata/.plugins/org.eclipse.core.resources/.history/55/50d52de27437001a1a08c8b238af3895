@@ -1,0 +1,54 @@
+package main;
+
+import java.awt.Container;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+@SuppressWarnings("serial")
+public class Omok extends JFrame {
+	private JPanel p1;
+	private JButton startB;
+
+	public Omok() {
+		Container c = getContentPane();
+		setLayout(null);
+
+		p1 = new JPanel();
+		p1.setBounds(220, 310, 60, 30);
+		startB = new JButton();
+
+		p1.add(startB);
+		c.add(p1);
+
+		setBounds(200, 200, 500, 500);
+		setVisible(true);
+		Event();
+	}
+
+	public void Event() {
+		// 종료
+		this.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				System.exit(0);
+			}
+		});
+		// ESC 종료
+		this.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+					System.exit(0);
+				}
+			}
+		});
+
+	}
+
+}

@@ -1,0 +1,70 @@
+package DataStream;
+
+import java.awt.Container;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+
+@SuppressWarnings("serial")
+public class TryNotepad extends JFrame implements ActionListener {
+	private JTextArea area;
+	private JScrollPane scroll;
+	private MenuPane menu;
+
+	public TryNotepad() {
+		super("간단 메모장");
+		area = new JTextArea();
+		scroll = new JScrollPane(area);
+		area.setFont(new Font("고딕", Font.BOLD, 17));
+
+		menu = new MenuPane();
+		this.setJMenuBar(menu);
+
+		Container con = getContentPane();
+		con.add("Center", scroll);
+
+		setBounds(300, 300, 600, 500);
+		setVisible(true);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		event();
+	}
+
+	public void event() {
+		menu.getNewM().addActionListener(this);
+		menu.getOpenM().addActionListener(this);
+		menu.getSaveM().addActionListener(this);
+		menu.getExitM().addActionListener(this);
+		menu.getCutM().addActionListener(this);
+		menu.getCopyM().addActionListener(this);
+		menu.getPasteM().addActionListener(this);
+
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == menu.getNewM()) {
+			area.setText("왜안도ㅚ는디 ");
+			area.setText("");
+		} else if (e.getSource() == menu.getOpenM()) {
+
+		} else if (e.getSource() == menu.getSaveM()) {
+
+		} else if (e.getSource() == menu.getExitM()) {
+			System.exit(0);
+		} else if (e.getSource() == menu.getCutM()) {
+
+		} else if (e.getSource() == menu.getCopyM()) {
+
+		} else if (e.getSource() == menu.getPasteM()) {
+
+		}
+	}
+
+	public static void main(String[] args) {
+		new TryNotepad();
+	}
+}

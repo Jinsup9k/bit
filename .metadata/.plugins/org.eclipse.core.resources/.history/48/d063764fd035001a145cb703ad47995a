@@ -1,0 +1,8 @@
+package thread;
+
+public class Synchronized extends Thread {
+
+	public static void main(String[] args) {
+		Synchronized aa 
+	}
+}

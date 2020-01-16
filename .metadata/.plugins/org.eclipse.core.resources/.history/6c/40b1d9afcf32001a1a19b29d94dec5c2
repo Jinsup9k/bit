@@ -1,0 +1,133 @@
+package thread;
+
+import java.awt.Frame;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+@SuppressWarnings("serial")
+public class Packman extends Frame implements KeyListener, Runnable {
+	private Image img, icon;
+	private int sel, x = 225, y = 225, mx, my, score = 0;
+	private int[] iconX;
+	private int[] iconY;
+
+// main
+	public static void main(String[] args) {
+		new Packman();
+
+	}
+
+	public Packman() {
+		iconX = new int[5];
+		iconY = new int[5];
+		img = getToolkit().getImage("packman.jpg");
+		icon = getToolkit().getImage("tangerine.png");
+
+		for (int i = 0; i < 5; i++) {
+			iconX[i] = (int) (Math.random() * 460) + 20;
+			iconY[i] = (int) (Math.random() * 430) + 50;
+		}
+		setLayout(null);
+		setBounds(300, 200, 500, 500);
+		setResizable(false);
+		setVisible(true);
+
+		// 종료 이벤트
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				System.exit(0);
+			}
+		});
+		addKeyListener(this);
+
+		Thread t = new Thread(this);
+		t.start();
+	}
+
+	@Override
+	public void paint(Graphics g) {
+
+		for (int i = 0; i < 5; i++) {
+			g.drawImage(icon, iconX[i], iconY[i], 20, 20, this);
+		}
+		g.drawImage(img, x, y, x + 50, y + 50, sel * 50, 0, sel * 50 + 50, 50, this);// 앞에서부터 위치 4개 이미지 위치 4개
+	}
+
+// thread
+	@Override
+	public void run() {
+
+		while (true) {
+			if (sel % 2 == 0) {
+				sel++;
+			} else {
+				sel--;
+			}
+
+			x += mx;
+			y += my;
+			if (x > 500) {
+				x = 0;
+			} else if (x < 0) {
+				x = 500;
+			} else if (y > 500) {
+				y = 0;
+			} else if (y < 0) {
+				y = 500;
+			}
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			int bx = x + 20, bx2 = x - 20, by = y + 20, by2 = y - 20;
+			for (int i = 0; i < 5; i++) {
+				if (iconX[i] <= bx && iconX[i] >= bx2 && iconY[i] <= by && iconY[i] >= by2) {
+					iconX[i] = iconY[i] = 0;
+					score++;
+				}
+			}
+			repaint();
+		}
+	}
+
+// keyListener
+	@Override
+	public void keyPressed(KeyEvent e) {
+		int key = e.getKeyCode();
+		if (key == KeyEvent.VK_ESCAPE) {// 27번
+			System.exit(0);
+		} else if (key == KeyEvent.VK_LEFT) {
+			sel = 0;
+			mx = -15;
+			my = 0;
+		} else if (key == KeyEvent.VK_RIGHT) {
+			sel = 2;
+			mx = 15;
+			my = 0;
+		} else if (key == KeyEvent.VK_UP) {
+			sel = 4;
+			mx = 0;
+			my = -15;
+		} else if (key == KeyEvent.VK_DOWN) {
+			sel = 6;
+			mx = 0;
+			my = 15;
+		}
+		repaint();
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+	}
+
+}

@@ -1,0 +1,88 @@
+package practice0108;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class SungJukService {
+	Scanner scan = new Scanner(System.in);
+	private ArrayList<SungJukDTO> list = new ArrayList<SungJukDTO>();
+	SungJukDTO dto;
+
+	public void menu() {
+		SungJukDTO s = new SungJukDTO();
+		while (true) {
+			System.out.println("*************");
+			System.out.println("   1. 입력");
+			System.out.println("   2. 출력");
+			System.out.println("   3. 검색");
+			System.out.println("   4. 삭제");
+			System.out.println("   5. 정렬");
+			System.out.println("   6. " + "끝");
+			System.out.println("*************");
+			System.out.print("번호 : ");
+			int choice = scan.nextInt();
+
+			if (choice == 1) {// 입력
+				insertArticle();
+			} else if (choice == 2) {// 출력
+				printArticle();
+			} else if (choice == 3) {// 검색
+				searchArticle();
+			} else if (choice == 4) {// 삭제
+				deleteArticle();
+			} else if (choice == 5) {// 정렬
+				sortAticle();
+			} else if (choice == 6) {// 끝
+				System.out.println("프로그램을 종료합니다.");
+				break;
+			} else {
+				System.out.println("잘못 입력하셨습니다.(1~6)");
+				continue;
+			}
+		} // while
+	}// main
+
+	private void sortAticle() {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void deleteArticle() {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void searchArticle() {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void printArticle() {
+		System.out.println("번호\t이름\t국어\t영어\t수학\t총점\t평균");
+		for (SungJukDTO dto : list) {
+			System.out.println(dto);
+		}
+
+	}
+
+	private void insertArticle() {
+		SungJukDTO dto = new SungJukDTO();
+
+		System.out.print("번호 입력 : ");
+		dto.setNumber(scan.nextInt());
+		System.out.print("이름 입력 : ");
+		dto.setName(scan.next());
+		System.out.print("국어 입력 : ");
+		dto.setKor(scan.nextInt());
+		System.out.print("영어 입력 : ");
+		dto.setEng(scan.nextInt());
+		System.out.print("수학 입력 : ");
+		dto.setMath(scan.nextInt());
+
+		dto.calc();
+		list.add(dto);
+		System.out.println("입력 완료");
+
+	}
+
+}

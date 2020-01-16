@@ -1,0 +1,169 @@
+package DataStream;
+
+import java.awt.Container;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+
+@SuppressWarnings("serial")
+public class ScoreForm extends JFrame implements ActionListener, Score {
+	private JLabel hakL, nameL, korL, engL, mathL;
+	private JTextField hakT, nameT, korT, engT, mathT;
+	private JButton inputB, printB, searchB, descB, saveB, loadB;
+	private JScrollPane scroll;
+	private JPanel p1, p2, p3;
+	private JTextArea area;
+	private ScoreDTO dto;
+	private ArrayList<ScoreDTO> list = new ArrayList<ScoreDTO>();
+
+	public ScoreForm() {
+		hakL = new JLabel("학번");
+		nameL = new JLabel("이름");
+		korL = new JLabel("국어");
+		engL = new JLabel("영어");
+		mathL = new JLabel("수학");
+		hakT = new JTextField();
+		nameT = new JTextField();
+		korT = new JTextField();
+		engT = new JTextField();
+		mathT = new JTextField();
+
+		p1 = new JPanel(new GridLayout(6, 2, 1, 30));
+		p1.add(hakL);
+		p1.add(hakT);
+		p1.add(nameL);
+		p1.add(nameT);
+		p1.add(korL);
+		p1.add(korT);
+		p1.add(engL);
+		p1.add(engT);
+		p1.add(mathL);
+		p1.add(mathT);
+
+		area = new JTextArea();
+		scroll = new JScrollPane(area);
+
+		inputB = new JButton("입력");
+		printB = new JButton("출력");
+		searchB = new JButton("학번검색");
+		descB = new JButton("순위");
+		saveB = new JButton("파일저장");
+		loadB = new JButton("파일열기");
+
+		p2 = new JPanel(new GridLayout(1, 6, 5, 5));
+		p2.add(inputB);
+		p2.add(printB);
+		p2.add(searchB);
+		p2.add(descB);
+		p2.add(saveB);
+		p2.add(loadB);
+
+		p3 = new JPanel(new GridLayout(1, 2, 3, 3));
+		p3.add(p1);
+		p3.add(scroll);
+
+		setBounds(200, 300, 800, 400);
+		setVisible(true);
+
+		Container c = getContentPane();
+		c.add(p3);
+		c.add("South", p2);
+		event();
+	}
+
+	public void event() {
+		inputB.addActionListener(this);
+		printB.addActionListener(this);
+		searchB.addActionListener(this);
+	}
+
+	public static void main(String[] args) {
+		new ScoreForm();
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getActionCommand() == inputB.getActionCommand()) {
+			input(dto);
+		} else if (e.getActionCommand() == printB.getActionCommand()) {
+			area.append("학번\t이름\t국어\t영어\t수학\t총점\t평균\n");
+			print(area);
+		} else if (e.getActionCommand() == searchB.getActionCommand()) {
+
+			search(area);
+		} else if (e.getActionCommand() == descB.getActionCommand()) {
+			tot_desc();
+		} else if (e.getActionCommand() == saveB.getActionCommand()) {
+			save();
+		} else if (e.getActionCommand() == loadB.getActionCommand()) {
+			load();
+		}
+	}
+
+	@Override
+	public void input(ScoreDTO dto) {
+		int hak = Integer.parseInt(hakT.getText());
+		String name = nameT.getText();
+		int kor = Integer.parseInt(korT.getText());
+		int eng = Integer.parseInt(engT.getText());
+		int math = Integer.parseInt(mathT.getText());
+
+		dto = new ScoreDTO(hak, name, kor, eng, math);
+		list.add(dto);
+		JOptionPane.showMessageDialog(this, "입력 완료");
+	}
+
+	@Override
+	public void print(JTextArea output) {
+		for (ScoreDTO dto : list) {
+			area.append(dto + "\n");
+		}
+	}
+
+	@Override
+	public void search(JTextArea output) {
+		int hak = Integer.parseInt(JOptionPane.showInputDialog("찾을 학번을 입력하세요"));
+		int count = 0;
+
+		area.append("학번\t이름\t국어\t영어\t수학\t총점\t평균\n");
+
+		for (ScoreDTO dto : list) {
+			if (dto.getHak() == hak) {
+				area.append(dto + "\n");
+				count++;
+			}
+		}
+		if (count == 0) {
+			JOptionPane.showMessageDialog(this, "찾는 학번이 없습니다.");
+		}
+	}
+
+	@Override
+	public void tot_desc() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void save() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void load() {
+		// TODO Auto-generated method stub
+
+	}
+
+}

@@ -1,0 +1,22 @@
+package thread;
+
+import java.awt.Canvas;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Image;
+
+public class Racer extends Canvas {
+	Image img;
+
+	public Racer() {
+		// setBackground(new Color((int) (Math.random() * 256), (int) (Math.random() *
+		// 256), (int) (Math.random() * 256)));
+		img = getToolkit().getImage("D:\\java_se\\workspace\\13_exception_thread\\horse.gif");
+	}
+
+	@Override
+	public void paint(Graphics g) {
+		g.drawLine(0, getHeight() / 2, getWidth() / 2, getWidth());
+		g.drawImage(img, 0, 0, img.getWidth(this), getHeight(), this);
+	}
+}

@@ -1,0 +1,10 @@
+package practice0108;
+
+public class SungJukDTO {
+	
+	public SungJukDTO() {
+	}
+	public SungJukDTO() {
+		
+	}
+}

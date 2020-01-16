@@ -1,0 +1,66 @@
+package practice0108;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class SungJukService {
+	Scanner scan = new Scanner(System.in);
+
+	public SungJukService() {
+	}
+
+	public void menu() {
+		SungJukDTO s = new SungJukDTO();
+		while (true) {
+			System.out.println("************");
+			System.out.println("   1.입력");
+			System.out.println("   2.출력");
+			System.out.println("   3.검색");
+			System.out.println("   4.삭제");
+			System.out.println("   5.정렬");
+			System.out.println("   6.끝");
+			System.out.println("************");
+			System.out.print("번호 : ");
+			int choice = scan.nextInt();
+
+			if (choice == 1) {
+				// 입력
+				insertArticle();
+			} else if (choice == 2) {
+				// 출력
+			} else if (choice == 3) {
+				// 검색
+			} else if (choice == 4) {
+				// 삭제
+			} else if (choice == 5) {
+				// 정렬
+			} else if (choice == 6) {
+				// 끝
+			} else {
+				System.out.println("잘못 입력하셨습니다.");
+			}
+		}
+	}
+
+	private void insertArticle() {
+		ArrayList<SungJukDTO> list = new ArrayList<SungJukDTO>();
+		SungJukDTO sd = new SungJukDTO();
+		int number, kor, eng, math;
+		String name;
+
+		System.out.print("번호 입력 : ");
+		number = scan.nextInt();
+		
+		System.out.print("이름 입력 : ");
+		name = scan.next();
+		System.out.print("국어 입력 : ");
+		kor = scan.nextInt();
+		System.out.print("영어 입력 : ");
+		eng = scan.nextInt();
+		System.out.print("수학 입력 : ");
+		math = scan.nextInt();
+
+		sd = new SungJukDTO(number, name, kor, eng, math);
+	}
+
+}

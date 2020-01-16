@@ -1,0 +1,32 @@
+package thread;
+
+import java.awt.Frame;
+import java.awt.Label;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.text.SimpleDateFormat;
+
+public class Clock extends Frame {
+
+	public Clock() {
+		SimpleDateFormat sdf = new SimpleDateFormat("hh시 MM분 ss초");
+		Label l = new Label(sdf.format(1903015));
+
+		this.add("Center", l);
+		setBounds(750, 300, 300, 100);
+		setVisible(true);
+
+		// 이벤트
+		addWindowListener(new WindowAdapter() {// 종료
+			@Override
+			public void windowClosing(WindowEvent e) {
+				System.exit(0);
+			}
+		});
+	}// 기본 생성자
+
+	public static void main(String[] args) {
+		new Clock();
+
+	}
+}

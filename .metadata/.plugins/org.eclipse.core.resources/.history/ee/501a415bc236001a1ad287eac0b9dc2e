@@ -1,0 +1,55 @@
+package DataStream;
+
+public class ScoreDTO {
+	private String name;
+	private int hak, kor, eng, math, tot;
+	private double avg;
+	public static final int SUBJECT = 3;
+
+	public ScoreDTO(int hak, String name, int kor, int eng, int math) {
+		this.hak = hak;
+		this.name = name;
+		this.kor = kor;
+		this.eng = eng;
+		this.math = math;
+	}
+
+	public void calc() {
+		tot = kor + eng + math;
+		avg = 1.0 * tot / SUBJECT;
+	}
+
+	public int getHak() {
+		return hak;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public int getKor() {
+		return kor;
+	}
+
+	public int getEng() {
+		return eng;
+	}
+
+	public int getMath() {
+		return math;
+	}
+
+	public int getTot() {
+		return tot;
+	}
+
+	public double getAvg() {
+		return avg;
+	}
+
+	@Override
+	public String toString() {
+		return hak + "\t" + name + "\t" + kor + "\t" + eng + "\t" + math + "\t" + tot + "\t" + avg;
+
+	}
+}

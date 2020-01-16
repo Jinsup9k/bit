@@ -1,0 +1,8 @@
+package DataStream;
+
+public class ByteStream {
+	
+	public static void main(String[] args) {
+		
+	}
+}

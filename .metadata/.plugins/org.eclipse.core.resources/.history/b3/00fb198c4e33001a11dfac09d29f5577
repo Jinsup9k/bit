@@ -1,0 +1,24 @@
+package swing;
+
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+
+@SuppressWarnings("serial")
+public class JButtonEx extends JFrame {
+	private Icon icon1 = new ImageIcon("");
+	private Icon icon2 = new ImageIcon("");
+	private Icon icon3 = new ImageIcon("");
+	private Icon icon4 = new ImageIcon("");
+	private Icon icon5 = new ImageIcon("");
+	
+	public JButtonEx() {
+		setBounds(300,200,500,500);
+		
+	
+	}
+	
+	public static void main(String[] args) {
+		new JButtonEx();
+	}
+}

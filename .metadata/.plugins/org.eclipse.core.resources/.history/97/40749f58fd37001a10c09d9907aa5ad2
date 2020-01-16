@@ -1,0 +1,24 @@
+package network;
+
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
+public class InetAddressTest {
+
+	public static void main(String[] args) throws UnknownHostException {
+		InetAddress naver = InetAddress.getByName("www.naver.com");
+		System.out.println("NAVER IP = " + naver.getHostAddress());
+		System.out.println();
+
+		InetAddress local = InetAddress.getLocalHost();
+		System.out.println("local = " + local.getHostAddress());
+		System.out.println();
+
+		InetAddress[] ar = new InetAddress[10];
+
+		for (int i = 0; i < 10; i++) {
+			ar[i] = InetAddress.getByName("www.daum.net");
+			System.out.println("daum = "+ ar[i].getHostAddress());
+		}
+	}
+}

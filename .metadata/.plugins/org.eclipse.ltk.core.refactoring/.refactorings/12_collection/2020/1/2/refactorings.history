@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;collection.SetText&apos; to &apos;SetTest&apos;&#x0D;&#x0A;- Original project: &apos;12_collection&apos;&#x0D;&#x0A;- Original element: &apos;collection.SetText&apos;&#x0D;&#x0A;- Renamed element: &apos;collection.SetTest&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;SetText&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;collection{SetText.java[SetText" matchStrategy="1" name="SetTest" qualified="false" references="true" similarDeclarations="false" stamp="1578370305341" textual="false" version="1.0"/>
+</session>

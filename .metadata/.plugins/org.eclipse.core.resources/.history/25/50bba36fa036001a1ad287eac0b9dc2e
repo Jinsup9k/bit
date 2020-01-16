@@ -1,0 +1,92 @@
+package DataStream;
+
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+
+@SuppressWarnings("serial")
+public class MenuPane extends JMenuBar implements KeyListener {
+	private JMenu fileM, editM, viewM;
+	private JMenuItem newM, openM, saveM, exitM, cutM, copyM, pasteM, jinsM;
+
+	public MenuPane() {
+		fileM = new JMenu("파일");
+		editM = new JMenu("편집");
+		viewM = new JMenu("보기");
+
+		newM = new JMenuItem("새로만들기");
+		openM = new JMenuItem("열기");
+		saveM = new JMenuItem("저장");
+		exitM = new JMenuItem("나가기");
+		cutM = new JMenuItem("잘라내기");
+		copyM = new JMenuItem("복사");
+		pasteM = new JMenuItem("붙여넣기");
+		jinsM = new JMenuItem("박진수가 만들었다");
+
+		fileM.add(newM);
+		fileM.add(openM);
+		fileM.add(saveM);
+		fileM.add(exitM);
+		editM.add(cutM);
+		editM.add(copyM);
+		editM.add(pasteM);
+		viewM.add(jinsM);
+
+		add(fileM);
+		add(editM);
+		add(viewM);
+
+		//단축키 만들기가 숙제~ c v x
+	}
+
+	public JMenuItem getNewM() {
+		return newM;
+	}
+
+	public JMenuItem getExitM() {
+		return exitM;
+	}
+
+	public JMenuItem getOpenM() {
+		return openM;
+	}
+
+	public JMenuItem getSaveM() {
+		return saveM;
+	}
+
+	public JMenuItem getCutM() {
+		return cutM;
+	}
+
+	public JMenuItem getCopyM() {
+		return copyM;
+	}
+
+	public JMenuItem getPasteM() {
+		return pasteM;
+	}
+// keyListener
+	@Override
+	public void keyPressed(KeyEvent e) {
+		if(e.getKeyCode()==e.ALT_MASK&& e.getKeyCode() == e.VK_X) {
+			System.out.println("잘라내기");
+		}
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

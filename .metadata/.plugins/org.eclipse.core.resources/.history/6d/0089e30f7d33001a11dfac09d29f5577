@@ -1,0 +1,54 @@
+package swingPractice;
+
+import java.awt.Container;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+public class Timer extends JFrame implements Runnable, ActionListener {
+	private JButton startButton, stopButton;
+	private JPanel p1, p2;
+	private JLabel time;
+
+	public Timer() {
+		Container con = getContentPane();
+
+		startButton = new JButton("시작");
+		stopButton = new JButton("정지");
+		startButton.setFont(new Font("궁서", Font.BOLD, 20));
+		stopButton.setFont(new Font("궁서", Font.BOLD, 20));
+
+		p1 = new JPanel();
+		p1.setLayout(new GridLayout(2, 1));
+		p1.add(startButton);
+		p1.add(stopButton);
+		con.add("East", p1);
+
+		setBounds(300, 200, 400, 300);
+		setVisible(true);
+		setResizable(false);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+
+	public static void main(String[] args) {
+		new Timer();
+	}
+
+	@Override
+	public void run() {
+		// 쓰레드 임당
+
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// 액션리스너 임당
+
+	}
+}

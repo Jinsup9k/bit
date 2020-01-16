@@ -1,0 +1,38 @@
+package DataStream;
+
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+
+@SuppressWarnings("serial")
+public class MenuPane extends JMenuBar {
+	private JMenu fileM, editM, viewM;
+	private JMenuItem newM, openM, saveM, exitM, cutM, copyM, pasteM, jinsM;
+
+	public MenuPane() {
+		fileM = new JMenu();
+		newM = new JMenuItem();
+		openM = new JMenuItem();
+		saveM = new JMenuItem();
+		exitM = new JMenuItem();
+
+		fileM.add(newM);
+		fileM.add(openM);
+		fileM.add(saveM);
+		fileM.add(exitM);
+
+		editM = new JMenu();
+		cutM = new JMenuItem();
+		copyM = new JMenuItem();
+		pasteM = new JMenuItem();
+
+		editM.add(cutM);
+		editM.add(copyM);
+		editM.add(pasteM);
+
+		viewM = new JMenu();
+
+		jinsM = new JMenuItem();
+		viewM.add(jinsM);
+	}
+}

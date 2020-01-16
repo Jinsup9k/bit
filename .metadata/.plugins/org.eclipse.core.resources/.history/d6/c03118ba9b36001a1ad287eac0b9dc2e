@@ -1,0 +1,20 @@
+package DataStream;
+
+public class PersonDTO {
+	private String name;
+	private int age;
+	private double height;
+
+	public String getName() {
+		return name;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public double getHeight() {
+		return height;
+	}
+
+}

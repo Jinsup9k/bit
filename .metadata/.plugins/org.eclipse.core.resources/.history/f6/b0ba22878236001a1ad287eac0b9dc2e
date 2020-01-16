@@ -1,0 +1,101 @@
+package DataStream;
+
+import java.awt.Container;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+
+@SuppressWarnings("serial")
+public class TryNotepad extends JFrame implements ActionListener {
+	private JTextArea area;
+	private JScrollPane scroll;
+	private MenuPane menu;
+
+	public TryNotepad() {
+		super("간단 메모장");
+		area = new JTextArea();
+		scroll = new JScrollPane(area);
+		area.setFont(new Font("고딕", Font.BOLD, 17));
+
+		menu = new MenuPane();
+		this.setJMenuBar(menu);
+
+		Container con = getContentPane();
+		con.add("Center", scroll);
+
+		setBounds(300, 300, 600, 500);
+		setVisible(true);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		event();
+	}
+
+	public void event() {
+		menu.getNewM().addActionListener(this);
+		menu.getOpenM().addActionListener(this);
+		menu.getSaveM().addActionListener(this);
+		menu.getExitM().addActionListener(this);
+		menu.getCutM().addActionListener(this);
+		menu.getCopyM().addActionListener(this);
+		menu.getPasteM().addActionListener(this);
+
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == menu.getNewM()) {
+			area.setText("");
+		} else if (e.getSource() == menu.getOpenM()) {
+			openDialog();// 열기 다이얼로그
+			fileRead();// 파일읽기
+		} else if (e.getSource() == menu.getSaveM()) {
+
+		} else if (e.getSource() == menu.getExitM()) {
+			int result = JOptionPane.showConfirmDialog(this, "저장 하시겠습니까?", "메모장", JOptionPane.YES_NO_CANCEL_OPTION);
+			if (result == JOptionPane.YES_OPTION) {
+				// 파일저장
+				savedialog();
+				System.exit(0);
+			} else if (result == JOptionPane.NO_OPTION) {
+				System.exit(0);
+			}
+		} else if (e.getSource() == menu.getCutM()) {
+			area.cut();
+		} else if (e.getSource() == menu.getCopyM()) {
+			area.copy();
+		} else if (e.getSource() == menu.getPasteM()) {
+			area.paste();
+		}
+	}
+
+	private void openDialog() {
+		JFileChooser chooser = new JFileChooser();
+		int result = chooser.showOpenDialog(this);
+
+//		if (result == 0) {
+		if (result == JFileChooser.APPROVE_OPTION) {// 위와 같다
+			// 선택한 파일의 경로와 ㅍ ㅏ 일명
+			File file = chooser.getSelectedFile();
+			JOptionPane.showInternalMessageDialog(this, file);
+		}
+	}
+
+	private void fileRead() {
+
+	}
+
+	private void savedialog() {
+		JFileChooser chooser = new JFileChooser();
+		chooser.showSaveDialog(this);
+	}
+
+	public static void main(String[] args) {
+		new TryNotepad();
+	}
+}

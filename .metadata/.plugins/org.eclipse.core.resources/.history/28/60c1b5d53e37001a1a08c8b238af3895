@@ -1,0 +1,147 @@
+package swingPractice;
+
+import java.awt.Canvas;
+import java.awt.Color;
+import java.awt.Graphics;
+
+@SuppressWarnings("serial")
+public class DrCanvas2 extends Canvas {
+	private MsPaint2 msPaint2;
+
+	public DrCanvas2(MsPaint2 msPaint2) {
+		this.msPaint2 = msPaint2;
+		this.setBackground(new Color(244, 224, 254)); // 연보라 색으로
+		// 이벤트
+	}
+
+	@Override
+	public void paint(Graphics g) {
+		// 구그림
+		legacy(g);
+
+		// 신그림
+		// 좌표
+		int x1 = Integer.parseInt(msPaint2.getX1T().getText().trim());// 양쪽의 공백을 제거해서 가져옴
+		int y1 = Integer.parseInt(msPaint2.getY1T().getText().trim());
+		int x2 = Integer.parseInt(msPaint2.getX2T().getText().trim());
+		int y2 = Integer.parseInt(msPaint2.getY2T().getText().trim());
+		int z1 = Integer.parseInt(msPaint2.getZ1T().getText().trim());
+		int z2 = Integer.parseInt(msPaint2.getZ2T().getText().trim());
+
+		// 색
+		switch (msPaint2.getCombo().getSelectedIndex()) {
+		case 0:
+			g.setColor(new Color(255, 0, 0));
+			break;
+		case 1:
+			g.setColor(new Color(255, 100, 0));
+			break;
+		case 2:
+			g.setColor(new Color(255, 255, 0));
+			break;
+		case 3:
+			g.setColor(new Color(0, 255, 0));
+			break;
+		case 4:
+			g.setColor(new Color(0, 0, 255));
+			break;
+		case 5:
+			g.setColor(new Color(0, 0, 150));
+			break;
+		case 6:
+			g.setColor(new Color(255, 0, 255));
+			break;
+		}
+
+		// 도형
+		if (msPaint2.getFill().isSelected()) {
+			if (msPaint2.getLine().isSelected()) {
+				g.drawLine(x1, y1, x2, y2);
+			} else if (msPaint2.getCircle().isSelected()) {
+				g.fillOval(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x2 - x1), Math.abs(y2 - y1));
+			} else if (msPaint2.getRect().isSelected()) {
+				g.fillRect(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x2 - x1), Math.abs(y2 - y1));
+			} else if (msPaint2.getRoundRect().isSelected()) {
+				g.fillRoundRect(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x2 - x1), Math.abs(y2 - y1), z1, z2);
+			} else if (msPaint2.getPen().isSelected()) {
+				g.drawLine(x1, y1, x2, y2);
+			}
+		} else if (!msPaint2.getFill().isSelected()) {
+			if (msPaint2.getLine().isSelected()) {
+				g.drawLine(x1, y1, x2, y2);
+			} else if (msPaint2.getCircle().isSelected()) {
+				g.drawOval(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x2 - x1), Math.abs(y2 - y1));
+			} else if (msPaint2.getRect().isSelected()) {
+				g.drawRect(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x2 - x1), Math.abs(y2 - y1));
+			} else if (msPaint2.getRoundRect().isSelected()) {
+				g.drawRoundRect(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x2 - x1), Math.abs(y2 - y1), z1, z2);
+			} else if (msPaint2.getPen().isSelected()) {
+				g.drawLine(x1, y1, x2, y2);
+			}
+		}
+	}
+
+	private void legacy(Graphics g) {
+		for (ShapeDTO2 dto : msPaint2.getList()) {
+			// 좌표
+			int x1 = dto.getX1();
+			int y1 = dto.getY1();
+			int x2 = dto.getX2();
+			int y2 = dto.getY2();
+			int z1 = dto.getZ1();
+			int z2 = dto.getZ2();
+
+			// 색
+			switch (dto.getColor()) {
+			case 0:
+				g.setColor(new Color(255, 0, 0));
+				break;
+			case 1:
+				g.setColor(new Color(255, 100, 0));
+				break;
+			case 2:
+				g.setColor(new Color(255, 255, 0));
+				break;
+			case 3:
+				g.setColor(new Color(0, 255, 0));
+				break;
+			case 4:
+				g.setColor(new Color(0, 0, 255));
+				break;
+			case 5:
+				g.setColor(new Color(0, 0, 150));
+				break;
+			case 6:
+				g.setColor(new Color(255, 0, 255));
+				break;
+			}
+			// 도형
+			if (dto.isFill()) {
+				if (dto.getShape() == Figure.LINE) {
+					g.drawLine(x1, y1, x2, y2);
+				} else if (dto.getShape() == Figure.CIRCLE) {
+					g.fillOval(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x2 - x1), Math.abs(y2 - y1));
+				} else if (dto.getShape() == Figure.RECT) {
+					g.fillRect(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x2 - x1), Math.abs(y2 - y1));
+				} else if (dto.getShape() == Figure.ROUNDRECT) {
+					g.fillRoundRect(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x2 - x1), Math.abs(y2 - y1), z1, z2);
+				} else if (dto.getShape() == Figure.PEN) {
+					g.drawLine(x1, y1, x2, y2);
+				}
+			} else if (!dto.isFill()) {
+				if (dto.getShape() == Figure.LINE) {
+					g.drawLine(x1, y1, x2, y2);
+				} else if (dto.getShape() == Figure.CIRCLE) {
+					g.drawOval(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x2 - x1), Math.abs(y2 - y1));
+				} else if (dto.getShape() == Figure.RECT) {
+					g.drawRect(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x2 - x1), Math.abs(y2 - y1));
+				} else if (dto.getShape() == Figure.ROUNDRECT) {
+					g.drawRoundRect(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x2 - x1), Math.abs(y2 - y1), z1, z2);
+				} else if (dto.getShape() == Figure.PEN) {
+					g.drawLine(x1, y1, x2, y2);
+				}
+			}
+		}
+
+	}
+}

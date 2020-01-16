@@ -1,0 +1,89 @@
+package ex;
+
+import java.awt.Frame;
+import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+@SuppressWarnings("serial")
+public class paintMain extends Frame implements MouseListener, MouseMotionListener, Runnable {
+	int pX, pY, pX2, pY2;
+
+	public paintMain() {
+
+		setBounds(250, 200, 600, 500);
+		setVisible(true);
+
+		// 종료
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				System.exit(0);
+			}
+		});
+		// 드래그
+		addMouseListener(this);
+		addMouseMotionListener(this);
+
+		Thread t = new Thread(this);
+		t.start();
+	}
+
+	@Override
+	public void paint(Graphics g) {
+		g.drawLine(pX, pY, pX2, pY2);
+
+	}
+
+	public static void main(String[] args) {
+		new paintMain();
+	}
+
+	// mouseListener
+	@Override
+	public void mouseClicked(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		pX2 = e.getX();
+		pY2 = e.getY();
+		System.out.println(pX + " " + pY);
+	}
+
+// mouseMotion
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		pX = e.getX();
+		pY = e.getY();
+		System.out.println(pX + " " + pY);
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		repaint();
+	}
+
+	@Override
+	public void run() {
+	}
+}

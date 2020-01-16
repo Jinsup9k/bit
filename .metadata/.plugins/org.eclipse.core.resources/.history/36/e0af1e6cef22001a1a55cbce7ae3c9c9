@@ -1,0 +1,26 @@
+package for_while_dowhile;
+
+public class ForTest_LCM {
+	public static void main(String[] args) {
+		int i, num, count = 0;
+
+		for (i = 1; i <= 100; i++) {// 100회 반복
+			num = (int) (Math.random() * 500) + 1;// 난수 생성 1~ 500
+			if (num % 2 == 0 && num % 3 == 0) { // 난수 100 개중 2 와 3의 공배수 출력
+				count++;// 공배수면 카운트 ++
+				System.out.print("2와 3의 공배수 개수 =  "+ count);	
+			}
+			
+			// count++; //공배수들의 개수를 센다
+			// System.out.print("2와 3의 공배수의 개수 = "+count);
+
+		}//for 끝
+	}
+}
+//1 ~ 500사이의 난수를 100개 발생하여 2와 3의 공배수만 출력하고 합과 개수를 출력하시오
+//단 1줄에 7개씩 출력하시오
+//[실행결과]
+//36  12 ...
+//
+//2와 3의 공배수 개수 = 
+//2와 3의 공배수 합 =

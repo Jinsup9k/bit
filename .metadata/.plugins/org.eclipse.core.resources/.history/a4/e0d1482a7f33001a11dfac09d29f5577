@@ -1,0 +1,73 @@
+package swingPractice;
+
+import java.awt.Container;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+public class Timer extends JFrame implements Runnable, ActionListener {
+	private JButton startButton, stopButton;
+	private JPanel p1, p2;
+	private JLabel time;
+	static int count;
+
+	public Timer() {
+		Container con = getContentPane();
+
+		startButton = new JButton("Ω√¿€");
+		stopButton = new JButton("¡§¡ˆ");
+		startButton.setFont(new Font("±√º≠", Font.BOLD, 20));
+		stopButton.setFont(new Font("±√º≠", Font.BOLD, 20));
+
+		p1 = new JPanel();
+		p1.setLayout(new GridLayout(2, 1));
+		p1.add(startButton);
+		p1.add(stopButton);
+
+		time = new JLabel(count);
+		time.setFont(new Font("∏º¿∫ ∞ÌµÒ", Font.BOLD, 30));
+
+		p2 = new JPanel();
+		p2.add(time);
+
+		con.add("East", p1);
+		con.add("Center", p2);
+		setBounds(300, 200, 400, 300);
+		setVisible(true);
+		setResizable(false);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		// ¿Ã∫•∆Æ
+		startButton.addActionListener(this);
+		stopButton.addActionListener(this);
+
+	}
+
+	public static void main(String[] args) {
+		new Timer();
+	}
+
+	@Override
+	public void run() {
+		if(count == 20) {
+			count =0;
+		}
+
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getActionCommand() == startButton.getActionCommand()) {
+
+		} else if (e.getActionCommand() == stopButton.getActionCommand()) {
+
+		}
+	}
+}

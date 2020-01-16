@@ -1,0 +1,45 @@
+package network;
+
+import java.awt.Container;
+import java.awt.GridLayout;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+
+public class ChatClient extends JFrame {
+	private JTextArea output;
+	private JTextField input;
+	private JButton send;
+	private JScrollPane scroll;
+	private JPanel p1, p2;
+
+	public ChatClient() {
+		Container c = getContentPane();
+		setLayout(null);
+		output = new JTextArea("");
+		input = new JTextField("");
+		send = new JButton("Àü¼Û");
+		scroll = new JScrollPane(output);
+		scroll.setBounds(10,10,280,250);
+		
+		p2 = new JPanel(new GridLayout(1,2,10,10));
+		p2.setBounds(10,260,260,90);
+		p2.add(input);
+		p2.add(send);
+
+		c.add(scroll);
+		c.add(p2);
+		
+		setBounds(200, 200, 300, 400);
+		setVisible(true);
+
+	}
+
+	public static void main(String[] args) {
+		new ChatClient();
+	}
+}

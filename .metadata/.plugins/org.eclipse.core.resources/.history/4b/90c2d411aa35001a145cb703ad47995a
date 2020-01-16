@@ -1,0 +1,8 @@
+package swingPractice;
+
+public class Snippet {
+	public static void main(String[] args) {
+		bottomPanel.add(line);
+	}
+}
+
